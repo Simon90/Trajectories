@@ -8,6 +8,18 @@
 * Comparisons can be qualitative (visual) or quantitative (numeric)
 
 ```{r}
+require(trajectories)
+require(spacetime)
+require(maptools)
+Sys.setenv(JAVA_HOME='C:\\Program Files\\Java\\jre7')
+require(OpenStreetMap)
+require(ggplot2)
+require (rgdal)
+require (maptools)
+require(plotKML)
+
+## Holger's Cycle Tracks
+
 getTr <- function (file) {
   tr <- readGPX (file)
   tr <- tr$tracks[[1]][[1]]
@@ -28,19 +40,17 @@ for (f in files) {
   if (length (grep ("Running", f)) > 0) 
   {
   runs <- c (runs, tr)
-  vec <- c(vec, "red")
   }
   else
   {
   rides1 <- c (rides1, tr)
-  vec <- c(vec, "green")
   }
 }
-holger <- TracksCollection (list (runs=Tracks (runs), rides1=Tracks (rides1)))
-plot (holger, col=c("green", "blue", "red"), lwd=1)
 
-bla <- TracksCollection(list(rides1=Tracks(rides1)))
-plot(bla, col="red")
+holger <- TracksCollection(list(rides1=Tracks(rides1)))
+plot(holger, col="red")
+
+## Mark's Cycle Tracks
 
 getTr <- function (file) {
     tr <- readGPX (file)
@@ -63,12 +73,6 @@ for (f in files) {
 }
 mark <- TracksCollection (list (rides2=Tracks (rides2)))
 plot (mark, col="blue", lwd=1)
-
-tog <- TracksCollection(list(rides1 = Tracks (rides1), rides2 = Tracks (rides2)))
-plot(tog)
-
-mark
-holger
 
 ```
 
