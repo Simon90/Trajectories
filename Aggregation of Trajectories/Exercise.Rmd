@@ -1,0 +1,27 @@
+# AGGREGATION OF TRAJECTORIES
+
+-------------
+
+## Homework
+
+* Use trajectory aggregation to describe how Holger's cycling differs from mine
+* Comparisons can be qualitative (visual) or quantitative (numeric)
+
+## OR
+
+* Extend the above `trplot` function to plot `Tracks` and `TracksCollection`
+  objects.
+* or extend the `stplot` routine
+
+## OR
+
+* Devise a `summary` function for `Tracks` and `TracksCollections` objects
+
+---
+
+
+<span style="color:green"; font-size:2em>
+Answer here
+</span>
+
+-----
