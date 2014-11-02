@@ -29,7 +29,7 @@ getTr <- function (file) {
   stidf <- STIDF (sp, t, data.frame (tr$ele))
   as (stidf, "Track")
 }
-vec <- vector()
+
 ddir <- "dat/gpx-tracks/"
 files <- list.files (ddir)
 files <- as.character (sapply (files, function (x) paste (ddir, x, sep="")))
