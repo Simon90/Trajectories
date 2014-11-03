@@ -7,17 +7,94 @@
 * Use trajectory aggregation to describe how Holger's cycling differs from mine
 * Comparisons can be qualitative (visual) or quantitative (numeric)
 
-```{r}
+
+```r
 require(trajectories)
+```
+
+```
+## Loading required package: trajectories
+```
+
+```r
 require(spacetime)
+```
+
+```
+## Loading required package: spacetime
+```
+
+```r
 require(maptools)
+```
+
+```
+## Loading required package: maptools
+```
+
+```
+## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called 'maptools'
+```
+
+```r
 #Sys.setenv(JAVA_HOME='C:\\Program Files\\Java\\jre7')
 require(OpenStreetMap)
+```
+
+```
+## Loading required package: OpenStreetMap
+## Loading required package: rJava
+## Loading required package: raster
+## Loading required package: sp
+## Loading required package: rgdal
+## rgdal: version: 0.9-1, (SVN revision 518)
+## Geospatial Data Abstraction Library extensions to R successfully loaded
+## Loaded GDAL runtime: GDAL 1.11.0, released 2014/04/16
+## Path to GDAL shared files: C:/Users/Da/R/win-library/3.1/rgdal/gdal
+## GDAL does not use iconv for recoding strings.
+## Loaded PROJ.4 runtime: Rel. 4.8.0, 6 March 2012, [PJ_VERSION: 480]
+## Path to PROJ.4 shared files: C:/Users/Da/R/win-library/3.1/rgdal/proj
+```
+
+```r
 require(ggplot2)
+```
+
+```
+## Loading required package: ggplot2
+```
+
+```
+## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called 'ggplot2'
+```
+
+```r
 require (rgdal)
 require (maptools)
-require(plotKML)
+```
 
+```
+## Loading required package: maptools
+```
+
+```
+## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called 'maptools'
+```
+
+```r
+require(plotKML)
+```
+
+```
+## Loading required package: plotKML
+## plotKML version 0.4-5 (2014-07-30)
+## URL: http://plotkml.r-forge.r-project.org/
+```
+
+```r
 ## Holger's Cycle Tracks
 
 getTr <- function (file) {
@@ -46,10 +123,30 @@ for (f in files) {
   rides1 <- c (rides1, tr)
   }
 }
+```
 
+```
+## dat/gpx-tracks/2014-03-18-Running.gpx 
+## dat/gpx-tracks/2014-03-30-Running.gpx 
+## dat/gpx-tracks/2014-05-14-Racebike.gpx 
+## dat/gpx-tracks/2014-06-08-Racebike.gpx 
+## dat/gpx-tracks/2014-07-12-Racebike.gpx 
+## dat/gpx-tracks/2014-08-06-Racebike.gpx 
+## dat/gpx-tracks/2014-08-14-Running.gpx 
+## dat/gpx-tracks/2014-08-16-Racebike.gpx 
+## dat/gpx-tracks/2014-08-17-Running.gpx 
+## dat/gpx-tracks/2014-08-29-Racebike.gpx 
+## dat/gpx-tracks/2014-09-20-Racebike.gpx
+```
+
+```r
 holger <- TracksCollection(list(rides1=Tracks(rides1)))
 plot(holger, col="red")
+```
 
+![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png) 
+
+```r
 ## Mark's Cycle Tracks
 
 getTr <- function (file) {
@@ -71,9 +168,22 @@ for (f in files) {
   cat (f, "\n")
   rides2 <- c (rides2, getTr (f))
 }
+```
+
+```
+## dat/gpx-tracks-mp/activity_600897367.gpx 
+## dat/gpx-tracks-mp/activity_603849790.gpx 
+## dat/gpx-tracks-mp/activity_605276709.gpx
+```
+
+```r
 mark <- TracksCollection (list (rides2=Tracks (rides2)))
 plot (mark, col="blue", lwd=1)
+```
 
+![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-2.png) 
+
+```r
 tracklength <- function(x) {
   
   l <- length(x) - 1
@@ -89,7 +199,11 @@ tracklength <- function(x) {
   as.numeric(distance)
 }
 
+tracklength(holger@tracksCollection$rides1@tracks$Track1@sp)
+```
 
+```
+## [1] 13142.25
 ```
 
 ---
@@ -99,6 +213,7 @@ tracklength <- function(x) {
 Holger:
 Tracks are from Münster, Möhnesee and Zürich
 TracksCollection contains both cycling and running
+
 
 Mark:
 Tracks are only from Münster
@@ -128,18 +243,85 @@ Mark 3: 04.10.2014 13:25 - 17:01 Coesfeld/Münster  ~ 65 - 84 metres in height
 </span>
 
 Track Lengths in Meters
-```{r}
-tracklength(holger@tracksCollection$rides1@tracks$Track1@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track2@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track3@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track4@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track5@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track6@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track7@sp)
 
+```r
+tracklength(holger@tracksCollection$rides1@tracks$Track1@sp)
+```
+
+```
+## [1] 13142.25
+```
+
+```r
+tracklength(holger@tracksCollection$rides1@tracks$Track2@sp)
+```
+
+```
+## [1] 147821.8
+```
+
+```r
+tracklength(holger@tracksCollection$rides1@tracks$Track3@sp)
+```
+
+```
+## [1] 72912.11
+```
+
+```r
+tracklength(holger@tracksCollection$rides1@tracks$Track4@sp)
+```
+
+```
+## [1] 64540.19
+```
+
+```r
+tracklength(holger@tracksCollection$rides1@tracks$Track5@sp)
+```
+
+```
+## [1] 66044.06
+```
+
+```r
+tracklength(holger@tracksCollection$rides1@tracks$Track6@sp)
+```
+
+```
+## [1] 39482.09
+```
+
+```r
+tracklength(holger@tracksCollection$rides1@tracks$Track7@sp)
+```
+
+```
+## [1] 110951.8
+```
+
+```r
 tracklength(mark@tracksCollection$rides2@tracks$Track1@sp)
+```
+
+```
+## [1] 47988.64
+```
+
+```r
 tracklength(mark@tracksCollection$rides2@tracks$Track2@sp)
+```
+
+```
+## [1] 48376.58
+```
+
+```r
 tracklength(mark@tracksCollection$rides2@tracks$Track3@sp)
+```
+
+```
+## [1] 96966.49
 ```
 
 
