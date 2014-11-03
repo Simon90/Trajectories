@@ -92,55 +92,99 @@ tracklength <- function(x) {
 
 ```
 
----
+-------------
 
 
 <span style="color:green"; font-size:2em>
 Holger:
 Tracks are from Münster, Möhnesee and Zürich
-TracksCollection contains both cycling and running
-
-Mark:
-Tracks are only from Münster
-TracksCollection contains only cycling: Therefore, we only compare these with Holger's cycling tracks
-
-Holger 1: 14.05.2014 16:20 - 17:04 Münster ~ 65 metres in height
-
-Holger 2: 08.06.2014 06:02 - 11:07 Möhnesee ~ 80 - 211 metres in height
-
-Holger 3: 12.07.2014 09:05 - 11:28 Airport Münster/Osnabrück  ~ 50 - 70 metres in height
-
-Holger 4: 06.08.2014 06:28 - 08:34 Münster ~ 65 metres in height
-
-Holger 5: 16.08.2014 09:43 - 11:54 Münster ~ 65 metres in height
-
-Holger 6: 29.08.2014 10:15 - 12:56 Zürich  ~ 405 - 440 metres in height
-
-Holger 7: 20.09.2014 07:36 - 11:27 Rheine/Emsdetten ~ 50 metres in height
-
-
-Mark 1: 28.09.2014 14:04 - 15:47 Münster/Havixbeck ~ 60 metres in height
-
-Mark 2: 02.10.2014 15:12 - 16:55 Münster/Havixbeck ~ 60 metres in height
-
-Mark 3: 04.10.2014 13:25 - 17:01 Coesfeld/Münster  ~ 65 - 84 metres in height
-
+TracksCollection contains both cycling and running <br>
 </span>
 
-Track Lengths in Meters
+<span style="color:blue"; font-size:2em>
+<br>Mark:
+Tracks are only from Münster
+TracksCollection contains only cycling: Therefore, we only compare these with Holger's cycling tracks
+</span>
+
+<span style="color:green"; font-size:2em>
+<br> Holger 1: 14.05.2014 16:20 - 17:04 Münster ~ 65 metres in height
+</span>
+
 ```{r}
 tracklength(holger@tracksCollection$rides1@tracks$Track1@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track2@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track3@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track4@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track5@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track6@sp)
-tracklength(holger@tracksCollection$rides1@tracks$Track7@sp)
+```
 
+<span style="color:green"; font-size:2em>
+<br> Holger 2: 08.06.2014 06:02 - 11:07 Möhnesee ~ 80 - 211 metres in height
+</span>
+
+```{r}
+tracklength(holger@tracksCollection$rides1@tracks$Track2@sp)
+```
+
+<span style="color:green"; font-size:2em>
+<br> Holger 3: 12.07.2014 09:05 - 11:28 Airport Münster/Osnabrück  ~ 50 - 70 metres in height
+</span>
+
+```{r}
+tracklength(holger@tracksCollection$rides1@tracks$Track3@sp)
+```
+
+<span style="color:green"; font-size:2em>
+<br> Holger 4: 06.08.2014 06:28 - 08:34 Münster ~ 65 metres in height
+</span>
+
+```{r}
+tracklength(holger@tracksCollection$rides1@tracks$Track4@sp)
+```
+
+<span style="color:green"; font-size:2em>
+<br> Holger 5: 16.08.2014 09:43 - 11:54 Münster ~ 65 metres in height
+</span>
+
+```{r}
+tracklength(holger@tracksCollection$rides1@tracks$Track5@sp)
+```
+
+<span style="color:green"; font-size:2em>
+<br> Holger 6: 29.08.2014 10:15 - 12:56 Zürich  ~ 405 - 440 metres in height
+</span>
+
+```{r}
+tracklength(holger@tracksCollection$rides1@tracks$Track6@sp)
+```
+
+<span style="color:green"; font-size:2em>
+<br> Holger 7: 20.09.2014 07:36 - 11:27 Rheine/Emsdetten ~ 50 metres in height
+</span>
+
+```{r}
+tracklength(holger@tracksCollection$rides1@tracks$Track7@sp)
+```
+
+<span style="color:blue"; font-size:2em>
+<br> <br> Mark 1: 28.09.2014 14:04 - 15:47 Münster/Havixbeck ~ 60 metres in height
+</span>
+
+```{r}
 tracklength(mark@tracksCollection$rides2@tracks$Track1@sp)
+```
+
+<span style="color:blue"; font-size:2em>
+Mark 2: 02.10.2014 15:12 - 16:55 Münster/Havixbeck ~ 60 metres in height
+</span>
+
+```{r}
 tracklength(mark@tracksCollection$rides2@tracks$Track2@sp)
-tracklength(mark@tracksCollection$rides2@tracks$Track3@sp)
 ```
 
 
+<span style="color:blue"; font-size:2em>
+Mark 3: 04.10.2014 13:25 - 17:01 Coesfeld/Münster  ~ 65 - 84 metres in height
+</span>
+
+```{r}
+tracklength(mark@tracksCollection$rides2@tracks$Track3@sp)
+```
 -----
