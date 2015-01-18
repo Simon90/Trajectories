@@ -2,7 +2,7 @@ require(RJSONIO)
 
 getData <- function(id, time){
   url <- paste("http://api.openweathermap.org/data/2.5/history/city?id=",id,"&type=hour&start=",time,"&cnt=1&units=metric", collapse = "")
-  data_str <- paste(data_str, collapse = "")
+  data_str <- paste(url, collapse = "")
   data <- fromJSON(data_str)
   data
 }
