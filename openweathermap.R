@@ -18,7 +18,6 @@ getValueFromMain <- function(main, type){
   x
 }
   
-
 getCityId <- function(lat, lon){
   url <- paste("http://api.openweathermap.org/data/2.5/find?lat=", lat, "&lon=",-2.15, "&cnt=1", collapse = "")
   data <- fromJSON(url)
@@ -26,9 +25,14 @@ getCityId <- function(lat, lon){
   id
 }
 
-#id <- getCityId(51, 7)
-#time <- 1369728000
-#data <- getData(id, time)
-#main <- getMainInfo(data)
-#getValueFromMain(main, "temp")
+getClimaticInfo <- function (lat, lon, time, att){
+  id <- getCityId(lat, lon)
+  data <- getData(id, time)
+  main <- getMainInfo(data)
+  getValueFromMain(main, att)
+}
+
+getClimaticInfo(51,7, 1369728000, "humidity")
+getClimaticInfo(51,7, 1369728000, "temp")
+
 
