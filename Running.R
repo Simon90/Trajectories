@@ -56,9 +56,13 @@ getStats <- function (tr)
   drop <- ElevationMax - ElevationMin
   minkm <- round (Duration/TrackLength * 1000, 2) 
   maxSpeed <- round(max(tr@connections$speed) * 3.6, 2)
+  weather <- getWeatherInfo(tr)
   
   df = data.frame(Date, st,et,TrackLength,Duration, minkm, drop, maxSpeed)
   names(df) <- c("Date", "Start", "End", "Meters", "Minutes", "min/km", "Drop[m]", "SpeedMax[km/h]")
+  if (length(weather) > 0) {
+    df <- merge(df, weather)
+  }    
   df
 }
 
@@ -229,6 +233,8 @@ plotEleSpeed <- function (tr){
   mtext("Speed [m/s]", side=4, line=3, col="blue")
   mtext("Elevation [m]", side=2, line=3, col="black")
 }
+
+
 
 ## Import
 ddir1 <- "dat/2014-08-14-Running.gpx"

@@ -1,6 +1,6 @@
-require(RJSONIO)
 
-getData <- function(id, time){
+
+queryWeatherData <- function(id, time){
   url <- paste("http://api.openweathermap.org/data/2.5/history/city?id=",id,"&type=hour&start=",time,"&cnt=1&units=metric", collapse = "")
   data_str <- paste(url, collapse = "")
   data <- fromJSON(data_str)
@@ -8,12 +8,15 @@ getData <- function(id, time){
 }
 
 getMainInfo <- function(data){
-  main <- data$list[[2]]$main
+  main <- data$list[[1]]$main
+  main["temp"] = main["temp"] - 273.15
+  main["temp_min"] = main["temp_min"] - 273.15
+  main["temp_max"] = main["temp_max"] - 273.15
   main
 }
 
-getValueFromMain <- function(main, type){
-  x <- main[type]
+getValue <- function(data, attr){
+  x <- data[attr]
   x <- unname(x)
   x
 }
@@ -25,14 +28,28 @@ getCityId <- function(lat, lon){
   id
 }
 
-getClimaticInfo <- function (lat, lon, time, att){
+getWeatherInfo <- function (track){
+  df = data.frame()
+  lat <- track@sp@coords[1,]["lat"]
+  lon <- track@sp@coords[1,]["lon"]
+  time <- as.numeric(index(track@time[length(track@time)]))
   id <- getCityId(lat, lon)
-  data <- getData(id, time)
+  data <- queryWeatherData(id, time)
+  if (length(data$list) < 1) {
+    stop ('It is only possible to query data from OpenWeatherMap for the past 30 days')
+  }
   main <- getMainInfo(data)
-  getValueFromMain(main, att)
+  temp <- getValue(main, "temp")
+  humidity <- getValue(main, "humidity")
+  pressure <- getValue(main, "pressure")
+  windspeed <- getValue(data$list[[1]]$wind, "speed")
+  weather_description <- data$list[[1]]$weather[[1]]$description
+  df = data.frame(temp, humidity, weather_description, windspeed, pressure)
+  names(df) <- c("Temperature[°C]", "Humidity[%]", "Weather-Description", "Windspeed[m/s]", "Pressure[hPa]")
+  df  
 }
 
-getClimaticInfo(51,7, 1369728000, "humidity")
-getClimaticInfo(51,7, 1369728000, "temp")
+
+
 
 
