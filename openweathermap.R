@@ -1,17 +1,16 @@
 
 
 queryWeatherData <- function(id, time){
-  url <- paste("http://api.openweathermap.org/data/2.5/history/city?id=",id,"&type=hour&start=",time,"&cnt=1&units=metric", collapse = "")
-  data_str <- paste(url, collapse = "")
-  data <- fromJSON(data_str)
+  url <- paste("http://api.openweathermap.org/data/2.5/history/city?id=",id,"&type=hour&start=",time,"&cnt=1&units=metric", sep= "")
+  data <- fromJSON(readLines(url))
   data
 }
 
 getMainInfo <- function(data){
   main <- data$list[[1]]$main
-  main["temp"] = main["temp"] - 273.15
-  main["temp_min"] = main["temp_min"] - 273.15
-  main["temp_max"] = main["temp_max"] - 273.15
+  main["temp"] = as.numeric(main["temp"]) - 273.15
+  main["temp_min"] = as.numeric(main["temp_min"]) - 273.15
+  main["temp_max"] = as.numeric(main["temp_max"]) - 273.15
   main
 }
 
@@ -22,8 +21,8 @@ getValue <- function(data, attr){
 }
   
 getCityId <- function(lat, lon){
-  url <- paste("http://api.openweathermap.org/data/2.5/find?lat=", lat, "&lon=",-2.15, "&cnt=1", collapse = "")
-  data <- fromJSON(url)
+  url <- paste("http://api.openweathermap.org/data/2.5/find?lat=",lat,"&lon=",lon,"&cnt=1", sep="")
+  data <- fromJSON(readLines(url))
   id <- (data$list[[1]]$id)
   id
 }

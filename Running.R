@@ -5,6 +5,8 @@ require(ggplot2)
 require(plotKML)
 require(signal)
 require(ggmap)
+require(rjson)
+require(roxygen2)
 
 ##############################
 # - Einbindung OpenWeatherMap 
@@ -37,7 +39,6 @@ tracklength <- function(x) {
     gap <- (spDists(x1, x2, longlat = TRUE)) * 1000
     distance <- distance + gap
   }
-  
   as.numeric(distance)
 }
 
@@ -53,13 +54,12 @@ getStats <- function (tr)
   Duration <- round(sub/60, 2)
   ElevationMin <- min(as.numeric(as.vector(tr@data$tr.ele)))
   ElevationMax <- max(as.numeric(as.vector(tr@data$tr.ele)))
-  drop <- ElevationMax - ElevationMin
   minkm <- round (Duration/TrackLength * 1000, 2) 
   maxSpeed <- round(max(tr@connections$speed) * 3.6, 2)
   weather <- getWeatherInfo(tr)
   
-  df = data.frame(Date, st,et,TrackLength,Duration, minkm, drop, maxSpeed)
-  names(df) <- c("Date", "Start", "End", "Meters", "Minutes", "min/km", "Drop[m]", "SpeedMax[km/h]")
+  df = data.frame(Date, st,et,TrackLength,Duration, minkm, maxSpeed)
+  names(df) <- c("Date", "Start", "End", "Meters", "Minutes", "min/km", "SpeedMax[km/h]")
   if (length(weather) > 0) {
     df <- merge(df, weather)
   }    
@@ -88,21 +88,22 @@ plotMap <- function(tr, x, y)
   
   pathcolor <- "#F8971F"
   
-  ggmap(mapImageData,
+  plot <- ggmap(mapImageData,
         extent = "panel",
         ylab = "Latitude",
         xlab = "Longitude",
-        legend = "right") +
-    geom_path(aes(x = x, 
+        legend = "right") 
+  plot <- plot + geom_path(aes(x = x, 
                   y = y), 
-              colour = "black",
-              size = 2) +
+                  colour = "black",
+                  size = 2) +
     geom_path(aes(x = x, 
                   y = y),
               colour = pathcolor,
-              size = 1.4) +
-    labs(x = "Longitude", y = "Latitude") +
-    ggtitle(paste(c(l, "km in", t, "minutes"), collapse = " "))
+              size = 1.4) 
+  plot <- plot +  labs(x = "Longitude", y = "Latitude") 
+  plot <- plot +  ggtitle(paste(c(l, "km in", t, "minutes"), collapse = " "))
+return(plot)
 }
 
 localMaxima <- function(x) {
@@ -221,14 +222,18 @@ plotEleSpeed <- function (tr){
   h <- tr@connections
   med <- median(tr@connections$speed)
   h <- rbind(h, c(0, 0, med, 0))
-  speed <- h$speed
+  #speed <- h$speed
+  lowpass.spline <- smooth.spline(time, h$speed, spar = 0.6) 
+  s_values <- lowpass.spline["y"]
+  speed <- do.call(c, s_values) 
+  
   
   ylim <- c(ymin, ymax)
   
   par(mar=c(5,4,4,5)+.1)
   plot(time, elevation, ylim=ylim, type="l", col="black", lwd=3, xlab = xlab, ylab="")  
   par(new=TRUE)
-  plot(time, speed, type="l",col="blue",xaxt="n",yaxt="n",xlab="",ylab="", lwd=1)
+  plot(time, speed, type="l",col="blue",xaxt="n",yaxt="n",xlab="",ylab="", lwd=3)
   axis(4)
   mtext("Speed [m/s]", side=4, line=3, col="blue")
   mtext("Elevation [m]", side=2, line=3, col="black")
@@ -238,7 +243,7 @@ plotEleSpeed <- function (tr){
 
 ## Import
 ddir1 <- "dat/2014-08-14-Running.gpx"
-ddir2 <- "dat/2014-08-17-Running.gpx"
+ddir2 <- "dat/2015-02-01-Running.gpx"
 
 Tr1 <- getTr(ddir1)
 Tr2 <- getTr(ddir2)
@@ -260,8 +265,10 @@ plotMap(Tr1, x, y)
 
 ## Plot Elevation with Speed 
 plotEleSpeed (Tr1)
+plotEleSpeed (Tr2)
 
 ## Slope
+calculateSlope(Tr1)
 calculateSlope(Tr2)
 
 
