@@ -29,6 +29,15 @@ plotSpeed <- function(tr, df)
  return(plot)
 }
 
+#' Plot Speed
+#' @description
+#' The function plots the speed data on a map by applying a scale colour gradient
+#' @param Track-class
+#' @return plot
+#' @examples
+#' \dontrun{
+#' getStats(track)
+#' }
 plotSpe <- function(tr)
 {
   df <- as.data.frame(tr@sp@coords)

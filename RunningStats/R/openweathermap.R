@@ -1,5 +1,3 @@
-
-
 queryWeatherData <- function(id, time){
   url <- paste("http://api.openweathermap.org/data/2.5/history/city?id=",id,"&type=hour&start=",time,"&cnt=1&units=metric", sep= "")
   data <- fromJSON(readLines(url))
@@ -27,6 +25,15 @@ getCityId <- function(lat, lon){
   id
 }
 
+#' Get Weather Information
+#' @description
+#' The function queries weather data for the Track from OpenWeatherMap.org
+#' @param Track-class
+#' @return DataFrame
+#' @examples
+#' \dontrun{
+#' getWeatherInfo(track)
+#' }
 getWeatherInfo <- function (track){
   df = data.frame()
   lat <- track@sp@coords[1,]["lat"]
@@ -44,7 +51,7 @@ getWeatherInfo <- function (track){
   windspeed <- getValue(data$list[[1]]$wind, "speed")
   weather_description <- data$list[[1]]$weather[[1]]$description
   df = data.frame(temp, humidity, weather_description, windspeed, pressure)
-  names(df) <- c("Temperature[°C]", "Humidity[%]", "Weather-Description", "Windspeed[m/s]", "Pressure[hPa]")
+  names(df) <- c("Temperature[?C]", "Humidity[%]", "Weather-Description", "Windspeed[m/s]", "Pressure[hPa]")
   df  
 }
 

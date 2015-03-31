@@ -1,13 +1,12 @@
-require(trajectories)
-require(spacetime)
-require(OpenStreetMap)
-require(ggplot2)
-require(plotKML)
-require(signal)
-require(ggmap)
-require(rjson)
-
-
+#' Loading GPX File
+#' @description
+#' The function returns track statistics including Date, Start-time, End-time, Meters, Minutes, min/km, SpeedMax[km/h] and weather data. 
+#' @param Path to GPX file
+#' @return Track-class
+#' @examples
+#' \dontrun{
+#' getTr(file)
+#' }
 getTr <- function (file) {
   tr <- readGPX (file)
   tr <- tr$tracks[[1]][[1]]
@@ -32,6 +31,15 @@ tracklength <- function(x) {
   as.numeric(distance)
 }
 
+#' Getting Track statistics
+#' @description
+#' The function returns track statistics including Date, Start-time, End-time, Distance, Minutes, min/km, SpeedMax[km/h] and weather data. 
+#' @param Track-class
+#' @return DataFrame
+#' @examples
+#' \dontrun{
+#' getStats(tr)
+#' }
 getStats <- function (tr)
 {
   StartTime <- index(tr@time[1])
@@ -56,6 +64,15 @@ getStats <- function (tr)
   df
 }
 
+#' Plot Map
+#' @description
+#' The function returns track statistics including Date, Start-time, End-time, Distance, Minutes, min/km, SpeedMax[km/h] and weather data. 
+#' @param Track-class, x (lat), y (lon)
+#' @return Plot
+#' @examples
+#' \dontrun{
+#' plotMap(tr, x, y)
+#' }
 plotMap <- function(tr, x, y)
 {
   l <- toString(round(tracklength(tr@sp)/1000,2))
@@ -128,6 +145,15 @@ slope <- function (x,y, elevation, coords){
   v #%
 }
 
+#' Calculating the slope profile
+#' @description
+#' The function calculates the splope profile of a track by smoothing the elevation profile by applying a low-pass filter. The slope profile is determined by local minimas and maximas.
+#' @param Track-class
+#' @return DataFrame
+#' @examples
+#' \dontrun{
+#' calculateSlope(tr)
+#' }
 calculateSlope <- function (tr) {
   elevation <- as.vector(tr@data$tr.ele)
   coords <- tr@sp
@@ -198,7 +224,15 @@ calculateSlope <- function (tr) {
   existingDF
 }
 
-##
+#' Plotting Elevation against Speed
+#' @description
+#' The function plots the elevation profile and speed values.
+#' @param Track-class
+#' @return plot
+#' @examples
+#' \dontrun{
+#' plotEleSpeed(track=track)
+#' }
 plotEleSpeed <- function (tr){
   elevation <- as.vector(tr@data$tr.ele)
   time <- index(tr@time)

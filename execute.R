@@ -1,3 +1,13 @@
+require(trajectories)
+require(spacetime)
+require(OpenStreetMap)
+require(ggplot2)
+require(plotKML)
+require(signal)
+require(ggmap)
+require(rjson)
+
+
 ## Import
 ddir1 <- "dat/2014-08-14-Running.gpx"
 ddir2 <- "dat/2015-02-01-Running.gpx"

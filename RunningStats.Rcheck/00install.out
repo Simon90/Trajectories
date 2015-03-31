@@ -1,7 +1,0 @@
-* installing *source* package 'RunningStats' ...
-** R
-** preparing package for lazy loading
-Error in as.data.frame(tr@sp@coords) : Objekt 'Tr2' nicht gefunden
-Error : unable to load R code in package 'RunningStats'
-ERROR: lazy loading failed for package 'RunningStats'
-* removing 'E:/Git/Trajectories/RunningStats.Rcheck/RunningStats'

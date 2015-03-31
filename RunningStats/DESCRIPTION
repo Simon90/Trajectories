@@ -1,9 +1,13 @@
 Package: RunningStats
 Type: Package
-Title: What the package does (short line)
+Title: RunningStats
 Version: 1.0
 Date: 2015-03-30
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Authors@R: c(person("Simon", "Schoemaker", role = c("aut", "cre"),
+  	     email = "simon.schoemaker@googlemail.com"),
+	        person("Daniel", "Schumacher", role = c("aut"),
+		     email = "daniel.schumacher@wwu.de"))
+Maintainer: Simon Schoemaker <simon.schoemaker@googlemail.com>
+Description: This package provides statistics for running tracks in the GPX-Format. It provides plot functions for maps and elevation profiles and accesses the OpenWeatherMap API for historical weather data.
+License: GPL (>= 2)
+Depends: R (>= 3.1.0), trajectories, spacetime, OpenStreetMap, ggplot2, plotKML, signal, ggmap, rjson
