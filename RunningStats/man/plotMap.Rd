@@ -10,7 +10,7 @@ plotMap(tr, x, y)
 \item{Track-class,}{x (lat), y (lon)}
 }
 \value{
-DataFrame
+Plot
 }
 \description{
 The function returns track statistics including Date, Start-time, End-time, Distance, Minutes, min/km, SpeedMax[km/h] and weather data.

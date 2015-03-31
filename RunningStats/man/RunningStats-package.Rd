@@ -21,7 +21,7 @@ License: \tab GPL (>= 2)\cr
 }
 \author{
 Simon Schoemaker <simon.schoemaker@googlemail.com>
- Daniel Schumacher <daniel.schumacher@wwu.de>
+Daniel Schumacher <daniel.schumacher@wwu.de>
 
 Maintainer: Simon Schoemaker <simon.schoemaker@googlemail.com>
 }
@@ -38,5 +38,6 @@ Maintainer: Simon Schoemaker <simon.schoemaker@googlemail.com>
   plotMap(tr, x, y)
   getStats(tr)
   plotEleSpeed(tr)
+  plotSpeed(tr)
   }  
 }

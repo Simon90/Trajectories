@@ -39,4 +39,6 @@ calculateSlope(Tr1)
 calculateSlope(Tr2)
 
 ## Speed
-plotSpe(Tr2)
+plotSpeed(Tr2)
+
+
