@@ -5,14 +5,15 @@ date: "Tuesday, March 31, 2015"
 output: pdf_document
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r}
+```{r include=FALSE}
 require(RunningStats)
+```
 
-## Import
+# Import Tracks
+```{r}
+
 ddir1 <- "dat/2014-08-14-Running.gpx"
 ddir2 <- "dat/2015-02-01-Running.gpx"
 
@@ -20,4 +21,44 @@ Tr1 <- getTr(ddir1)
 Tr2 <- getTr(ddir2)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# Get Statistics
+```{r}
+## GetStats
+getStats(Tr1)
+getStats(Tr2)
+```
+
+# Plot Track on a Map
+```{r message=FALSE}
+## Plot with Basic Map
+df <- as.data.frame(Tr2@sp@coords)
+x <- df[,1]
+y <- df[,2]
+plotMap(Tr2, x, y)
+
+
+df <- as.data.frame(Tr1@sp@coords)
+x <- df[,1]
+y <- df[,2]
+plotMap(Tr1, x, y)
+```
+
+# Plot Elevation with Speed 
+```{r}
+plotEleSpeed (Tr1)
+plotEleSpeed (Tr2)
+```
+
+# Calculate Slope
+```{r}
+calculateSlope(Tr1)
+calculateSlope(Tr2)
+```
+
+# Plot Speed on a Map
+```{r message=FALSE}
+plotSpeed(Tr1)
+plotSpeed(Tr2)
+```
+
+

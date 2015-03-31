@@ -1,5 +1,6 @@
 queryWeatherData <- function(id, time){
-  url <- paste("http://api.openweathermap.org/data/2.5/history/city?id=",id,"&type=hour&start=",time,"&cnt=1&units=metric", sep= "")
+  url <- paste("http://api.openweathermap.org/data/2.5/history/city?id=",id,"&type=hour&start=",time,"&cnt=1&units=metric","&APPID=ef1c900892bd5bf3ee4e3fcea23a43c2", sep= "")
+  print(url)  
   data <- fromJSON(readLines(url))
   data
 }
@@ -19,7 +20,7 @@ getValue <- function(data, attr){
 }
   
 getCityId <- function(lat, lon){
-  url <- paste("http://api.openweathermap.org/data/2.5/find?lat=",lat,"&lon=",lon,"&cnt=1", sep="")
+  url <- paste("http://api.openweathermap.org/data/2.5/find?lat=",lat,"&lon=",lon,"&cnt=1","&APPID=ef1c900892bd5bf3ee4e3fcea23a43c2", sep="")
   data <- fromJSON(readLines(url))
   id <- (data$list[[1]]$id)
   id
@@ -41,6 +42,7 @@ getWeatherInfo <- function (track){
   time <- as.numeric(index(track@time[length(track@time)]))
   id <- getCityId(lat, lon)
   data <- queryWeatherData(id, time)
+  print(data$list)
   if (length(data$list) < 1) {
     stop ('It is only possible to query data from OpenWeatherMap for the past 30 days')
   }
